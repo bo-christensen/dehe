@@ -12,7 +12,6 @@ fn main() {
     }
     
     let file_to_modify = &args[1];
-    println!("{:?}", &file_to_modify);
     // check that the file is a .hpp or .h file
     let mut allowed_files: Vec<String> = Vec::new();
     allowed_files.push(".hpp".to_string());
@@ -49,5 +48,4 @@ fn main() {
         .expect("Failed to seek to start of file");
     file.write_all(contents.as_bytes())
         .expect("Failed to write to file");
-    
 }
