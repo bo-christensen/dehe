@@ -6,7 +6,7 @@ use std::io::prelude::*;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    if  args.len() < 1 {
+    if  args.len() <= 1 {
         println!("Please specify which file to modify");
         exit(0);
     }
