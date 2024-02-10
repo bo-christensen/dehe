@@ -3,7 +3,6 @@ This is a very tiny CLI tool meant to help define `#IFNDEF <identifier>` guards 
 
 All it does is generate a uuid and modify the specified file adding a header guard using #IFNDEF <uuid> as the identifier for the guard.
 
-The use if UUID is to avoid needing to change the guard name if the header artifacts change.
 
 ## Build
 Simply run `cargo build -r`
