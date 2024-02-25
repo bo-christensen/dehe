@@ -1,20 +1,28 @@
 # Define Header (DEHE)
-This is a very tiny CLI tool meant to help define `#IFNDEF <identifier>` guards in c++ .h and .hpp files.
 
-All it does is generate a uuid and modify the specified file adding a header guard using #IFNDEF <uuid> as the identifier for the guard.
+Define Header inserts uuids as `#ifndef` guards in c++ `.h` and `.hpp` files.
 
 
 ## Build
 Simply run `cargo build -r`
 
 ## Usage
-dehe `path-to-file`
 
-**Example**
+Define Header can target either single files or folders. Simply call the program and supply the path to your folder or file as the first argument.
 
+
+### Targeting a file  
+Suppose you had a header `my-header.h` in your working directory. Call dehe with the file name as argument:
+
+```text
+dehe ./my-header.h
 ```
-dehe /src/file.hpp
+
+### Targeting a folder  
+dehe will iterate all `.h` and `.hpp` files in the indicated folder
+```text
+dehe ./folder
 ```
 
-## Warning
-I haven't yet had the tool mangle any of my files, but I also didn't bother writing any tests to ensure stability, as you may be able to tell as the entire tool is a scant 50 lines of code or so.
+### Usage Note
+dehe will scan the file for lines beginning with `#ifndef u` to determine whether to skip or modify the files
