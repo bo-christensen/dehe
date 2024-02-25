@@ -7,7 +7,8 @@ use crate::file_operations::{get_file_list, modify};
 use crate::file_operations::modify::ModificationResult;
 use crate::target::get_entry;
 
-fn main() {
+fn main()
+{
     let target = get_entry();
     let files = get_file_list(target);
     if files.len() == 0

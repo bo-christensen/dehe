@@ -4,14 +4,18 @@ use std::path::PathBuf;
 use std::process::exit;
 use crate::uuid;
 
-pub struct ModificationResult {
+
+pub struct ModificationResult
+{
     pub name: String,
     pub modified: bool
 }
 
 
-impl ModificationResult {
-    pub fn new(name: String, modified: bool) -> Self {
+impl ModificationResult
+{
+    pub fn new(name: String, modified: bool) -> Self
+    {
         ModificationResult {
             name,
             modified
@@ -21,10 +25,9 @@ impl ModificationResult {
 
 
 /// Read a file and write header guards if necessary. Returns true when a file was modified
-pub fn modify_file(path: &PathBuf) -> bool {
+pub fn modify_file(path: &PathBuf) -> bool
+{
     let modified_file: bool;
-
-
     if let Ok(mut file) = OpenOptions::new()
         .read(true)
         .write(true)
@@ -52,8 +55,11 @@ pub fn modify_file(path: &PathBuf) -> bool {
     return modified_file;
 }
 
-fn read_file_contents(str: &mut String, file: &mut File) {
-    match file.read_to_string(str) {
+
+fn read_file_contents(str: &mut String, file: &mut File)
+{
+    match file.read_to_string(str)
+    {
         Err(_) => {
             eprintln!("Operation failed when attempting to read from file");
             exit(0);
@@ -62,7 +68,9 @@ fn read_file_contents(str: &mut String, file: &mut File) {
     }
 }
 
-fn should_modify(str: &String) -> bool {
+
+fn should_modify(str: &String) -> bool
+{
     let matched_pattern = str
         .lines()
         .any(|line| line.starts_with("#ifndef u"));
@@ -70,12 +78,14 @@ fn should_modify(str: &String) -> bool {
 }
 
 
-fn rewrite_file(content: &String, file: &mut File) {
+fn rewrite_file(content: &String, file: &mut File)
+{
     let identifier = uuid::generate_new_uuid();
     let new_content = format!("#ifndef {}\n#define {}\n\n{}\n\n#endif", identifier, identifier, content);
     // ignoring the result: This could technically panic?
     let _ = file.seek(SeekFrom::Start(0));
-    match file.write_all(new_content.as_bytes()) {
+    match file.write_all(new_content.as_bytes())
+    {
         Err(_) => {
             eprintln!("Failed to write headers to file!")
         },

@@ -7,7 +7,8 @@ use crate::target::Target;
 
 /// Attempts to get all the .h and .hpp files whether the provided path is a header or
 /// a folder. Note: The function is non-recursive
-pub fn get_file_list(t: Target) -> Vec<PathBuf> {
+pub fn get_file_list(t: Target) -> Vec<PathBuf>
+{
     let mut path_list: Vec<PathBuf> = Vec::new();
     if !t.folder
     {
@@ -27,7 +28,8 @@ pub fn get_file_list(t: Target) -> Vec<PathBuf> {
 }
 
 
-fn get_files_from_folder(path_list: &mut Vec<PathBuf>, folder: String) {
+fn get_files_from_folder(path_list: &mut Vec<PathBuf>, folder: String)
+{
     let folder_path = Path::new(&folder);
     if let Ok(files) = fs::read_dir(folder_path)
     {
@@ -54,7 +56,8 @@ fn get_files_from_folder(path_list: &mut Vec<PathBuf>, folder: String) {
 }
 
 
-fn is_valid_file_ext(path: &PathBuf) -> bool {
+fn is_valid_file_ext(path: &PathBuf) -> bool
+{
     let valid: bool;
     if let Some(ext) = path.extension()
     {

@@ -2,14 +2,17 @@ use std::{env, fs};
 use std::process::exit;
 
 
-pub struct Target {
+pub struct Target
+{
     pub path: String,
     pub folder: bool,
 }
 
 
-impl Target {
-    pub fn new(p: String, f: bool) -> Self {
+impl Target
+{
+    pub fn new(p: String, f: bool) -> Self
+    {
         Target {
             path: p,
             folder: f,
@@ -18,7 +21,8 @@ impl Target {
 }
 
 
-pub fn get_entry() -> Target {
+pub fn get_entry() -> Target
+{
     let program_arguments: Vec<String> = env::args().collect();
     if program_arguments.len() < 2
     {
@@ -37,14 +41,18 @@ pub fn get_entry() -> Target {
 }
 
 
-fn path_exists(str_path: &String) -> bool {
+fn path_exists(str_path: &String) -> bool
+{
+
     fs::metadata(str_path).is_ok()
 }
 
 
-fn string_to_target(path: &String) -> Target {
+fn string_to_target(path: &String) -> Target
+{
     let meta = fs::metadata(path);
-    match meta {
+    match meta
+    {
         Ok(metadata) => {
             Target::new(path.to_owned(), metadata.is_dir())
         }
